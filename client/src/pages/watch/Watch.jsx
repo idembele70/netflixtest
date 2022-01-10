@@ -5,9 +5,9 @@ import './watch.scss'
 
 const Watch = () => {
   const location = useLocation()
-
-  const movie = location.movie
-  // console.log(location)
+  /* Added by ikd */
+  const movie = location.state.movie
+  /* end */
   return (
     <div className='watch'>
       <Link to='/'>
@@ -29,3 +29,4 @@ const Watch = () => {
 }
 
 export default Watch
+

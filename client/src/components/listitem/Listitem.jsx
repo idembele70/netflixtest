@@ -2,20 +2,19 @@ import {
   Add,
   PlayArrow,
   ThumbDownOutlined,
-  ThumbUpAltOutlined,
+  ThumbUpAltOutlined
 } from '@material-ui/icons'
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
-
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import './listItem.scss'
+
 
 const Listitem = ({ index, item }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [movie, setMovie] = useState({})
-
+  const navigate = useNavigate()
+  const location = useLocation()
   useEffect(() => {
     const getMovie = async () => {
       try {
@@ -33,11 +32,16 @@ const Listitem = ({ index, item }) => {
     }
     getMovie()
   }, [item])
-
-  // console.log(movie)
-
+  // Added by ikd
+  const handleClick = (e) => {
+    e.preventDefault()
+     navigate("/watch", { state: { movie } })
+  }
+  // End
   return (
-    <Link to={{ pathname: '/watch', movie: movie }}>
+    // Added by ikd
+    <Link to={{ pathname: "/watch"}}  onClick={handleClick}>
+      {/* end */}
       <div
         className='listItem'
         style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
